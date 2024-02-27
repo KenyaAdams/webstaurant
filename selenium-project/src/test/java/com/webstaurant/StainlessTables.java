@@ -15,8 +15,6 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class StainlessTables {
     public static void main(String[] args) {
-        int pageNum = 2; //will contain the result page number
-
         WebDriver driver = WebDriverManager.chromedriver().create();
         driver.get("https://www.webstaurantstore.com/");
         System.out.println(driver.getTitle());
@@ -30,7 +28,7 @@ public class StainlessTables {
         searchBar.submit();
 
         //Check all the pages for results missing the stainless work table text
-        System.out.println(checkPage(driver, pageNum) + " products are missing the 'table' text.");
+        System.out.println(checkPage(driver) + " products are missing the 'table' text.");
 
         //adds the last item to the cart
         addLastItem(driver);
@@ -77,7 +75,8 @@ public class StainlessTables {
     }
 
 
-    public static int checkPage(WebDriver driver, int pageNum) {
+    public static int checkPage(WebDriver driver) {
+        int pageNum = 2; //will contain the result page number
         int timesTextMissing = 0; //counter for the number of times the 'tables' text is missing
 
         while (pageNum > 1) {
